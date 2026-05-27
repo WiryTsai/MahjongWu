@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>麻將聽牌助手</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="input-panel" aria-labelledby="app-title">
+        <div class="title-row">
+          <div>
+            <h1 id="app-title">麻將聽牌助手</h1>
+            <p>點選手牌，立即計算可胡的進張。</p>
+          </div>
+          <div class="mode-control" role="group" aria-label="牌數模式">
+            <button class="mode-button is-active" data-mode="auto" type="button">自動</button>
+            <button class="mode-button" data-mode="13" type="button">13 張</button>
+            <button class="mode-button" data-mode="16" type="button">16 張</button>
+          </div>
+        </div>
+
+        <div class="hand-bar">
+          <div>
+            <span class="label">目前手牌</span>
+            <strong id="tile-count">0</strong>
+            <span id="target-text">張</span>
+          </div>
+          <button id="clear-hand" class="ghost-button" type="button">清空</button>
+        </div>
+
+        <div id="selected-hand" class="selected-hand" aria-live="polite"></div>
+        <p id="status-message" class="status-message">請輸入 13 張或 16 張手牌。</p>
+
+        <div id="tile-picker" class="tile-picker" aria-label="選牌區"></div>
+      </section>
+
+      <aside class="result-panel" aria-labelledby="result-title">
+        <div class="result-header">
+          <h2 id="result-title">聽牌結果</h2>
+          <span id="result-count" class="result-count">0 種</span>
+        </div>
+        <div id="wait-results" class="wait-results"></div>
+        <div class="notes">
+          <span>規則</span>
+          <p>13 張模式判斷 4 面子 1 雀頭，另含七對子、國士無雙。16 張模式判斷 5 面子 1 雀頭。</p>
+        </div>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

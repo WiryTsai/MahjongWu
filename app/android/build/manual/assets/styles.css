@@ -1,0 +1,376 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f7f2;
+  --ink: #19231f;
+  --muted: #66726d;
+  --panel: #ffffff;
+  --line: #d9dfd8;
+  --accent: #0f7b68;
+  --accent-strong: #095948;
+  --bamboo: #137d46;
+  --coin: #bd3f32;
+  --char: #1f5a9d;
+  --honor: #6f4ea5;
+  --shadow: 0 18px 55px rgba(25, 35, 31, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(130deg, rgba(15, 123, 104, 0.09), transparent 35%),
+    linear-gradient(315deg, rgba(189, 63, 50, 0.08), transparent 32%),
+    var(--bg);
+  color: var(--ink);
+  font-family:
+    "Microsoft JhengHei",
+    "PingFang TC",
+    system-ui,
+    sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1180px, calc(100vw - 32px));
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 20px;
+  align-items: start;
+  padding: 28px 0;
+}
+
+.input-panel,
+.result-panel {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.input-panel {
+  padding: 24px;
+}
+
+.result-panel {
+  position: sticky;
+  top: 24px;
+  padding: 22px;
+}
+
+.title-row,
+.hand-bar,
+.result-header,
+.tile-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+h1,
+h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.02;
+}
+
+h2 {
+  font-size: 1.35rem;
+}
+
+p {
+  margin: 0;
+}
+
+.title-row p {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+.mode-control {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  min-width: 230px;
+  padding: 4px;
+  background: #e9eee9;
+  border-radius: 8px;
+}
+
+.mode-button,
+.ghost-button {
+  border: 0;
+  cursor: pointer;
+}
+
+.mode-button {
+  min-height: 36px;
+  padding: 0 12px;
+  color: var(--muted);
+  background: transparent;
+  border-radius: 6px;
+}
+
+.mode-button.is-active {
+  color: #fff;
+  background: var(--accent);
+}
+
+.hand-bar {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+#tile-count {
+  font-size: 1.8rem;
+}
+
+.ghost-button {
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--accent-strong);
+  background: #fff;
+}
+
+.selected-hand {
+  min-height: 92px;
+  margin-top: 14px;
+  padding: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+  border: 1px dashed #bbc8c1;
+  border-radius: 8px;
+  background: #fbfcfa;
+}
+
+.status-message {
+  min-height: 24px;
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+.status-message.is-warning {
+  color: #a14120;
+}
+
+.tile-picker {
+  margin-top: 22px;
+  display: grid;
+  gap: 18px;
+}
+
+.tile-group {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.tile-group-header {
+  margin-bottom: 12px;
+}
+
+.tile-group-title {
+  font-weight: 700;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+  gap: 9px;
+}
+
+.tile {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 0.72;
+  border: 1px solid #c9d1ca;
+  border-bottom-width: 4px;
+  border-radius: 7px;
+  background: linear-gradient(#fffefa, #f2f1e8);
+  color: var(--tile-color, var(--ink));
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(25, 35, 31, 0.08);
+}
+
+.tile:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.tile:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+
+.tile-symbol {
+  display: block;
+  font-size: clamp(1.15rem, 4vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.tile-name {
+  display: block;
+  margin-top: 5px;
+  color: #4e5a55;
+  font-size: 0.72rem;
+}
+
+.tile-count {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  min-width: 19px;
+  height: 19px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+}
+
+.selected-tile {
+  padding: 5px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--tile-color, var(--ink));
+  cursor: pointer;
+}
+
+.selected-tile span:first-child {
+  font-weight: 800;
+}
+
+.result-count {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #e5f2ee;
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.wait-results {
+  min-height: 184px;
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-content: flex-start;
+}
+
+.empty-state {
+  width: 100%;
+  padding: 24px;
+  border: 1px dashed #bbc8c1;
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.wait-tile {
+  min-width: 68px;
+  padding: 12px 8px;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-bottom: 4px solid var(--accent);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--tile-color, var(--ink));
+}
+
+.wait-tile strong {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.wait-tile span {
+  color: #4e5a55;
+  font-size: 0.78rem;
+}
+
+.notes {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.notes span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .result-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(100vw - 20px, 1180px);
+    padding: 10px 0 18px;
+  }
+
+  .input-panel,
+  .result-panel {
+    padding: 16px;
+  }
+
+  .title-row,
+  .hand-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mode-control {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tile-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

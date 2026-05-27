@@ -1,0 +1,33 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.codex.mahjongwaits"
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.codex.mahjongwaits"
+        minSdk 23
+        targetSdk 36
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+def webAssetOutput = layout.buildDirectory.dir("generated/web-assets")
+
+tasks.register("syncWebAssets", Copy) {
+    from(rootProject.layout.projectDirectory.dir("..")) {
+        include "index.html"
+        include "styles.css"
+        include "app.js"
+    }
+    into(webAssetOutput)
+}
+
+android.sourceSets.main.assets.srcDir(webAssetOutput)
+
+tasks.matching { it.name.startsWith("merge") && it.name.endsWith("Assets") }.configureEach {
+    dependsOn("syncWebAssets")
+}
